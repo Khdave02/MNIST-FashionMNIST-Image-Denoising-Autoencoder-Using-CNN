@@ -38,6 +38,27 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
 ## Architecture
 ![Untitled drawing - Google Drawings - Google Chrome 11-10-2021 09_15_03 (2)](https://user-images.githubusercontent.com/87975841/136733323-1595d8c0-5431-4654-9cdd-97c6eaa8173d.png)
 
+```
+      self.encoder = nn.Sequential(
+            nn.Conv2d(1, 16, 3, stride=2, padding=1), # -> N, 16, 14, 14
+            nn.ReLU(),
+            nn.Conv2d(16, 32, 3, stride=2, padding=1), # -> N, 32, 7, 7
+            nn.ReLU(),
+            nn.Conv2d(32, 64, 7) # -> N, 64, 1, 1
+        )
+        
+        # N , 64, 1, 1
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(64, 32, 7), # -> N, 32, 7, 7
+            nn.ReLU(),
+            nn.ConvTranspose2d(32, 16, 3, stride=2, padding=1, output_padding=1), # N, 16, 14, 14 (N,16,13,13 without output_padding)
+            nn.ReLU(),
+            nn.ConvTranspose2d(16, 1, 3, stride=2, padding=1, output_padding=1), # N, 1, 28, 28  (N,1,27,27 without output_padding)
+            nn.Sigmoid()
+        ) 
+        
+ ```
+
 ## Why MSE LOSS
 We're comparing pixel values in input and output images, it will be best to use a loss that is meant for a regression task. Regression is all about comparing quantities rather than probabilistic values.
 ## Resources
