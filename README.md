@@ -44,6 +44,10 @@ We're comparing pixel values in input and output images, it will be best to use 
 - [Coursera Deep learning](https://www.coursera.org/specializations/deep-learning?)
 - [Pytorch Documentation](https://pytorch.org/)
 - [Denoising AE](https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html)
+- [Notes for deep learning](https://aman.ai/coursera-dl/)
+- [Autoencoder basic understanding](https://www.youtube.com/watch?v=q222maQaPYo&t=104s)
+
+Thanks to all contributors for providing great resources for learning
 
 ## Download and clone this repository
 https://github.com/Khdave02/MNIST-FashionMNIST-Denoising-Autoencoder-Using-CNN.git
