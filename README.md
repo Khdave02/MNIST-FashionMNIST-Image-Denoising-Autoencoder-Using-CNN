@@ -1,10 +1,10 @@
 # MNIST-FashionMNIST-Image-Denoising-Autoencoder-Using-CNN
 Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pytorch and CNN
 ## Table Of Contents:
-1. MNIST/FashionMNIST-Dataset
+1. [MNIST/FashionMNIST-Dataset](#mnist-fashionmnist-dataset)
 2. Denoising Autoencoder
 3. Hyperparameters
-4. Architecture
+4. [Architecture](#architecture)
 5. Training 
 6. Loss plots
 7. Results and Outputs
@@ -12,7 +12,7 @@ Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pyt
 
 
 
-## MNIST/FashionMNIST-Dataset
+## MNIST-FashionMNIST-Dataset
 MNIST DATASET is available at
 The MNIST database is available at [MNIST-DATASET](http://yann.lecun.com/exdb/mnist/) and Fashion-MNIST at [Fashion-MNIST](https://github.com/zalandoresearch/fashion-mnist)
 
