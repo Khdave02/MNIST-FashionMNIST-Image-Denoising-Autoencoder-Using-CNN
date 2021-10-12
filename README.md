@@ -1,5 +1,16 @@
 # MNIST-FashionMNIST-Image-Denoising-Autoencoder-Using-CNN
 Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pytorch and CNN
+## Table Of Contents:
+1. MNIST/FashionMNIST-Dataset
+2. Denoising Autoencoder
+3. Hyperparameters
+4. Architecture
+5. Training 
+6. Loss plots
+7. Results and Outputs
+8. Resources
+
+
 
 ## MNIST/FashionMNIST-Dataset
 MNIST DATASET is available at
@@ -15,12 +26,12 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
 ## Denoising Autoencoder
 - In denoising AE, data is corrupted in some manner through the addition of random noise, and the model is trained to predict the original uncorrupted data.
 - the choice of CNN serves the purpose for dimension and computational complexity reduction when arbitrary-sized images are used as input.
+- A denoising auto-encoder does two things:
+     - Encode the input (preserve the information about the data)
+     - Undo the effect of a corruption process stochastically applied to the input of the auto-encoder
 ![This is an image](https://miro.medium.com/max/5160/1*SxwRp9i23OM0Up4sEze1QQ@2x.png)
 
-## Results & Outputs
-![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_23_01 (3)](https://user-images.githubusercontent.com/87975841/136731578-1425201a-2a9a-43f5-8cbb-cb885a35bfb5.png)
 
-![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_44_01 (3)](https://user-images.githubusercontent.com/87975841/136731685-6dc4a90e-e016-424e-bbba-a91ef1a5d4fa.png)
 
 ## Hyperparameters
 - Batch-Size -> 64
@@ -29,13 +40,9 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
 - MSE Loss
 - Adam Optimizer
 - num of Epochs -> 10
-## Loss plots
-#### MNIST
-![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_18 (5)](https://user-images.githubusercontent.com/87975841/136733434-74330e31-b4a8-4423-9622-e6aff43110b5.png)
-#### Fashion-MNIST
-![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_54 (4)](https://user-images.githubusercontent.com/87975841/136733468-dc6e3df5-43c1-4648-8e22-c39ed686d3c7.png)
 
-## Architecture
+
+## Architecture 
 ![Untitled drawing - Google Drawings - Google Chrome 11-10-2021 09_15_03 (2)](https://user-images.githubusercontent.com/87975841/136733323-1595d8c0-5431-4654-9cdd-97c6eaa8173d.png)
 
 ```
@@ -58,9 +65,22 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
         ) 
         
  ```
+## Training
+we are  adding some noise to these images and we’ll feed these noisy_imgs to our model. The model will produce reconstructed images based on the noisy input. But, we want it to produce normal un-noisy images, and so, when we calculate the loss, we will compare the reconstructed outputs to the original images.
+## Loss plots
+#### MNIST
+![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_18 (5)](https://user-images.githubusercontent.com/87975841/136733434-74330e31-b4a8-4423-9622-e6aff43110b5.png)
+#### Fashion-MNIST
+![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_54 (4)](https://user-images.githubusercontent.com/87975841/136733468-dc6e3df5-43c1-4648-8e22-c39ed686d3c7.png)
 
-## Why MSE LOSS
+#### Why MSE LOSS
 We're comparing pixel values in input and output images, it will be best to use a loss that is meant for a regression task. Regression is all about comparing quantities rather than probabilistic values.
+## Results & Outputs
+![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_23_01 (3)](https://user-images.githubusercontent.com/87975841/136731578-1425201a-2a9a-43f5-8cbb-cb885a35bfb5.png)
+
+![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_44_01 (3)](https://user-images.githubusercontent.com/87975841/136731685-6dc4a90e-e016-424e-bbba-a91ef1a5d4fa.png)
+
+
 ## Resources
 - [Coursera Deep learning](https://www.coursera.org/specializations/deep-learning?)
 - [Pytorch Documentation](https://pytorch.org/)
@@ -72,3 +92,4 @@ Thanks to all contributors for providing great resources for learning
 
 ## Download and clone this repository
 https://github.com/Khdave02/MNIST-FashionMNIST-Denoising-Autoencoder-Using-CNN.git
+
