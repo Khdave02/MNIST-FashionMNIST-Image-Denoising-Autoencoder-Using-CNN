@@ -2,13 +2,13 @@
 Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pytorch and CNN
 ## Table Of Contents:
 1. [MNIST/FashionMNIST-Dataset](#mnist-fashionmnist-dataset)
-2. Denoising Autoencoder
-3. Hyperparameters
+2. [Denoising Autoencoder](#denoising-autoencoder)
+3. [Hyperparameters](#hyperparameters)
 4. [Architecture](#architecture)
-5. Training 
-6. Loss plots
-7. Results and Outputs
-8. Resources
+5. [Training](#training)
+6. [Loss plot](#loss-plots)
+7. [Results and Outputs](#results-and-outputs)
+8. [Resources](#resources)
 
 
 
@@ -65,6 +65,9 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
         
  ```
 ## Training
+#### Adding Noise
+-  Random noise is added by pytorch -> torch.randn() we can also change levels of noise by changing multiplication factor.value used by me is 0.5.
+
 we are  adding some noise to these images and we’ll feed these noisy_imgs to our model. The model will produce reconstructed images based on the noisy input. But, we want it to produce normal un-noisy images, and so, when we calculate the loss, we will compare the reconstructed outputs to the original images.
 ## Loss plots
 #### MNIST
@@ -74,7 +77,7 @@ we are  adding some noise to these images and we’ll feed these noisy_imgs to o
 
 #### Why MSE LOSS
 We're comparing pixel values in input and output images, it will be best to use a loss that is meant for a regression task. Regression is all about comparing quantities rather than probabilistic values.
-## Results & Outputs
+## Results and Outputs
 ![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_23_01 (3)](https://user-images.githubusercontent.com/87975841/136731578-1425201a-2a9a-43f5-8cbb-cb885a35bfb5.png)
 
 ![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_44_01 (3)](https://user-images.githubusercontent.com/87975841/136731685-6dc4a90e-e016-424e-bbba-a91ef1a5d4fa.png)
