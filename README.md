@@ -34,13 +34,15 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
 
 
 ## Hyperparameters
-- Batch-Size -> 64
-- Learning-rate ->0.001
-- Weight-decay -> 0.00001
-- MSE Loss
-- Adam Optimizer
-- num of Epochs -> 10
 
+| Hyperparaeter |value          |
+| ------------- | ------------- |
+| Batch-Size    | 64            |
+| Learning-rate | 0.001         |
+| Weight-decay  | 0.00001       |
+| num of Epochs | 10            |
+| MSE Loss                      |
+| Adam Optimizer                |
 
 ## Architecture 
 ![Untitled drawing - Google Drawings - Google Chrome 11-10-2021 09_15_03 (2)](https://user-images.githubusercontent.com/87975841/136733323-1595d8c0-5431-4654-9cdd-97c6eaa8173d.png)
@@ -66,7 +68,7 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
  ```
 ## Training
 #### Adding Noise
--  Random noise is added by pytorch -> torch.randn() we can also change levels of noise by changing multiplication factor.value used by me is 0.5.
+-  Random noise is added by pytorch -> torch.randn() we can also change levels of noise by changing multiplication factor.In this model noised used is```torch.randn(img.size()) * 0.5```
 
 we are  adding some noise to these images and we’ll feed these noisy_imgs to our model. The model will produce reconstructed images based on the noisy input. But, we want it to produce normal un-noisy images, and so, when we calculate the loss, we will compare the reconstructed outputs to the original images.
 ## Loss plots
