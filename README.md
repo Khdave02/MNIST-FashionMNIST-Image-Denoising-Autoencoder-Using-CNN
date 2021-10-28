@@ -2,34 +2,30 @@
 Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pytorch and CNN
 ## Table Of Contents:
 1. [MNIST/FashionMNIST-Dataset](#mnist-fashionmnist-dataset)
-2. [Denoising Autoencoder](#denoising-autoencoder)
-3. [Hyperparameters](#hyperparameters)
-4. [Architecture](#architecture)
-5. [Training](#training)
-6. [Loss plot](#loss-plots)
+
+
+2. [Architecture](#architecture)
+3. [Adding Noise](#adding-noise)
+4. [Hyperparameters](#hyperparameters)
+5. [Training With Flowchart](#training-with-flowchart)
+6. [Loss plots of iterations](#loss-plots-of-iterations)
 7. [Results and Outputs](#results-and-outputs)
 8. [Resources](#resources)
 
 
 
 ## MNIST-FashionMNIST-Dataset
-MNIST DATASET is available at
-The MNIST database is available at [MNIST-DATASET](http://yann.lecun.com/exdb/mnist/) and Fashion-MNIST at [Fashion-MNIST](https://github.com/zalandoresearch/fashion-mnist)
+The [MNIST](http://yann.lecun.com/exdb/mnist/) and [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist) datasets are used. These datasets contain 60,000 training samples and 10,000 test samples. Each sample in the MNIST dataset is a 28x28 pixel grayscale image of a single handwritten digit between 0 & 9, whereas each sample in Fashion MNIST dataset is a 28x28 grayscale image associated with a label from 10 types of clothing.
 
-The MNIST database is a dataset of handwritten digits. It has 60,000 training samples, and 10,000 test samples. Each image is represented by 28x28 pixels, each containing a value 0 - 255 with its grayscale value.
+ 
 
-Fashion-MNIST is a dataset of Zalando's article images—consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes. 
+![](https://i.imgur.com/FhAVzAp.png)
 
-![This is an image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkdIB5OILwmRSfRB_Qf5-upoObl2WYTIP1_A&usqp=CAU)
-![This is an image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBxb7UywgFVpcIdEWEfolQc9VEm3hDIEpBSg&usqp=CAU)
 
-## Denoising Autoencoder
-- In denoising AE, data is corrupted in some manner through the addition of random noise, and the model is trained to predict the original uncorrupted data.
-- the choice of CNN serves the purpose for dimension and computational complexity reduction when arbitrary-sized images are used as input.
-- A denoising auto-encoder does two things:
-     - Encode the input (preserve the information about the data)
-     - Undo the effect of a corruption process stochastically applied to the input of the auto-encoder
-![This is an image](https://miro.medium.com/max/5160/1*SxwRp9i23OM0Up4sEze1QQ@2x.png)
+
+
+
+
 
 
 
@@ -41,47 +37,50 @@ Fashion-MNIST is a dataset of Zalando's article images—consisting of a trainin
 | Learning-rate | 0.001         |
 | Weight-decay  | 0.00001       |
 | num of Epochs | 10            |
-| MSE Loss                      |
-| Adam Optimizer                |
+|  Loss         |  MSE LOSS     |
+|  Optimizer    | Adam Optimizer|
+
+## Adding Noise
+* ```torch.randn``` is used to create a noisy tensor of the same size as the input. The amount of gausian noise can be changed by changing the multiplication factor.
+ 
+ ![](https://i.imgur.com/xeT9wzT.png)
+
 
 ## Architecture 
-![Untitled drawing - Google Drawings - Google Chrome 11-10-2021 09_15_03 (2)](https://user-images.githubusercontent.com/87975841/136733323-1595d8c0-5431-4654-9cdd-97c6eaa8173d.png)
 
-```
-      encoder 
-            Conv2d(1, 16, 3, stride=2, padding=1)
-            ReLU(),
-            Conv2d(16, 32, 3, stride=2, padding=1)
-            ReLU(),
-            Conv2d(32, 64, 7)
-                
-        # N , 64, 1, 1
-       decoder
-            ConvTranspose2d(64, 32, 7)
-            ReLU(),
-            ConvTranspose2d(32, 16, 3, stride=2, padding=1, output_padding=1)
-            ReLU(),
-            ConvTranspose2d(16, 1, 3, stride=2, padding=1, output_padding=1)
-            Sigmoid()
-       
+```   python
+      #Encoder
+      self.encoder = nn.Sequential(
+            nn.Conv2d(1, 16, 3, stride=2, padding=1), # -> N, 16, 14, 14
+            nn.ReLU(),
+            nn.Conv2d(16, 32, 3, stride=2, padding=1), # -> N, 32, 7, 7
+            nn.ReLU(),
+            nn.Conv2d(32, 64, 7) # -> N, 64, 1, 1
+        )
+        
+      #Decoder
+      self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(64, 32, 7), # -> N, 32, 7, 7
+            nn.ReLU(),
+            nn.ConvTranspose2d(32, 16, 3, stride=2, padding=1, output_padding=1), # N, 16, 14, 14 (N,16,13,13 without output_padding)
+            nn.ReLU(),
+            nn.ConvTranspose2d(16, 1, 3, stride=2, padding=1, output_padding=1), # N, 1, 28, 28  (N,1,27,27 without output_padding)
+            nn.Sigmoid()
+        )
+      
         
  ```
-## Training
-#### Adding Noise
--  Random noise is added by pytorch -> torch.randn() we can also change levels of noise by changing multiplication factor.In this model noised used is```torch.randn(img.size()) * 0.5```
+## Training with flowchart
+![](https://i.imgur.com/2YV6uPE.png)
 
-we are  adding some noise to these images and we’ll feed these noisy_imgs to our model. The model will produce reconstructed images based on the noisy input. But, we want it to produce normal un-noisy images, and so, when we calculate the loss, we will compare the reconstructed outputs to the original images.
-## Loss plots
-#### MNIST
-![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_18 (5)](https://user-images.githubusercontent.com/87975841/136733434-74330e31-b4a8-4423-9622-e6aff43110b5.png)
-#### Fashion-MNIST
-![Untitled24 ipynb - Colaboratory - Google Chrome 07-10-2021 12_47_54 (4)](https://user-images.githubusercontent.com/87975841/136733468-dc6e3df5-43c1-4648-8e22-c39ed686d3c7.png)
+In denoising autoencoder some noise is introduced to the input images. The encoder network downsamples the data into a lower dimensional latent space and then the decoder reconstructs the original data from the lower dimensional representation. MSE loss between the original image and the reconstructed image is calculated and is backpropogated. Value of the parameters is updated using Adam optimization to reduce the reconstruction error.
 
-#### Why MSE LOSS
-We're comparing pixel values in input and output images, it will be best to use a loss that is meant for a regression task. Regression is all about comparing quantities rather than probabilistic values.
+## Loss plots of iterations
+![](https://i.imgur.com/Nv85Rrv.png)
+
+
 ## Results and Outputs
-![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_23_01 (3)](https://user-images.githubusercontent.com/87975841/136731578-1425201a-2a9a-43f5-8cbb-cb885a35bfb5.png)
-
+![](https://i.imgur.com/5TNsDG0.png)
 ![AutoencoderMnistCNN ipynb - Colaboratory - Google Chrome 10-10-2021 11_44_01 (3)](https://user-images.githubusercontent.com/87975841/136731685-6dc4a90e-e016-424e-bbba-a91ef1a5d4fa.png)
 
 
@@ -94,6 +93,4 @@ We're comparing pixel values in input and output images, it will be best to use 
 
 Thanks to all contributors for providing great resources for learning
 
-## Download and clone this repository
-https://github.com/Khdave02/MNIST-FashionMNIST-Denoising-Autoencoder-Using-CNN.git
 
