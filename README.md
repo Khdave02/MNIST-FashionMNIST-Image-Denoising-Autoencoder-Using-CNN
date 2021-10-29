@@ -15,7 +15,7 @@ Implementation of Image-Denoising Autoencoder on MNIST/FashionMNIST by using Pyt
 
 
 ## MNIST-FashionMNIST-Dataset
-The [MNIST](http://yann.lecun.com/exdb/mnist/) and [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist) datasets are used. These datasets contain 60,000 training samples and 10,000 test samples. Each sample in the MNIST dataset is a 28x28 pixel grayscale image of a single handwritten digit between 0 & 9, whereas each sample in Fashion MNIST dataset is a 28x28 grayscale image associated with a label from 10 types of clothing.
+The [MNIST](http://yann.lecun.com/exdb/mnist/) and [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist) datasets are used. These datasets contain 60,000 training samples and 10,000 test samples. Each sample in the MNIST dataset is a 28x28 pixel grayscale image of a single handwritten digit between 0 & 9, whereas each sample in the Fashion MNIST dataset is a 28x28 grayscale image associated with a label from 10 types of clothing.
 
  
 
@@ -41,7 +41,7 @@ The [MNIST](http://yann.lecun.com/exdb/mnist/) and [Fashion MNIST](https://githu
 |  Optimizer    | Adam Optimizer|
 
 ## Adding Noise
-* ```torch.randn``` is used to create a noisy tensor of the same size as the input. The amount of gausian noise can be changed by changing the multiplication factor.
+* ```torch.randn``` is used to create a noisy tensor of the same size as the input. The amount of Gaussian noise can be changed by changing the multiplication factor.
  
  ![](https://i.imgur.com/xeT9wzT.png)
 
@@ -73,7 +73,7 @@ The [MNIST](http://yann.lecun.com/exdb/mnist/) and [Fashion MNIST](https://githu
 ## Training with flowchart
 ![](https://i.imgur.com/2YV6uPE.png)
 
-In denoising autoencoder some noise is introduced to the input images. The encoder network downsamples the data into a lower dimensional latent space and then the decoder reconstructs the original data from the lower dimensional representation. MSE loss between the original image and the reconstructed image is calculated and is backpropogated. Value of the parameters is updated using Adam optimization to reduce the reconstruction error.
+In denoising autoencoder some noise is introduced to the input images. The encoder network downsamples the data into a lower-dimensional latent space and then the decoder reconstructs the original data from the lower-dimensional representation. MSE loss between the original image and the reconstructed image is calculated and is backpropagated. Value of the parameters is updated using Adam optimization to reduce the reconstruction error.
 
 ## Loss plots of iterations
 ![](https://i.imgur.com/Nv85Rrv.png)
